@@ -4,6 +4,8 @@ class List extends React.Component{
 
     render(){
 
+        const filter = this.props.filter;
+
         const transactions = [
             { amount: 112.98, date: '27-01-2018T12:34', card_last_four: '2544' },
             { amount: 0.45, date: '01-12-2017T9:36', card_last_four: '4434' },
@@ -18,7 +20,10 @@ class List extends React.Component{
         ];
 
         const list = transactions.map((transaction)=>{
-            return <ol key={transaction.amount}>Amount: ${transaction.amount}, Date: {transaction.date}, Card: {transaction.card_last_four}</ol>
+            if(transaction.card_last_four.indexOf(filter) === -1){
+                return;
+            }
+            return <ol key={transaction.card_last_four}>Amount: ${transaction.amount}, Date: {transaction.date}, Card: {transaction.card_last_four}</ol>
         })
 
         return(

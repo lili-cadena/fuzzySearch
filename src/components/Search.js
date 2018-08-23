@@ -1,7 +1,15 @@
 import React from 'react';
-import List from './List'
 
 class Search extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.manageFilterChange = this.manageFilterChange.bind(this);
+    }
+
+    manageFilterChange(event) {
+        this.props.onFilterChange(event.target.value);
+    }
 
     render(){
         return (
@@ -9,8 +17,8 @@ class Search extends React.Component{
                 <input 
                     type="text"
                     placeholder="Search" 
-                    value={this.props.filterText}
-                    onChange={this.handleFilterTextChange}
+                    value={this.props.filter}
+                    onChange={this.manageFilterChange}
                 />
             </form>
         )
