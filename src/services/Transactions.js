@@ -22,7 +22,7 @@ transactions.forEach((transaction)=>{
     date = new Date(date).getTime()
     transaction['fecha'] = date
   
-    let newDate = year + "-" + month + "-" + day + time;
+    let newDate = day + "-" + month + "-" + year;
     transaction['date'] = newDate
     return transaction
 })
