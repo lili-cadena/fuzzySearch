@@ -1,5 +1,5 @@
 
-export default TransactionsService = [
+export const transactions = [
     { amount: 112.98, date: '27-01-2018T12:34', card_last_four: '2544' },
     { amount: 0.45, date: '01-12-2017T9:36', card_last_four: '4434' },
     { amount: 95.99, date: '23-11-2017T14:34', card_last_four: '3011' },
@@ -11,3 +11,22 @@ export default TransactionsService = [
     { amount: 4.69, date: '01-02-2018T02:34', card_last_four: '8488' },
     { amount: 1111.11, date: '15-01-2018T21:34', card_last_four: '9912' }
 ];
+
+transactions.forEach((transaction)=>{
+    let day = transaction.date.slice(0,2)
+    let month = transaction.date.slice(3,5)
+    let year = transaction.date.slice(6,10)
+    let time = transaction.date.slice(10,16)
+
+    let date = month + "-" + day + "-" + year;
+    date = new Date(date).getTime()
+    transaction['fecha'] = date
+  
+    let newDate = year + "-" + month + "-" + day + time;
+    transaction['date'] = newDate
+    return transaction
+})
+
+transactions.sort(function(a, b){
+    return a.fecha - b.fecha
+})
