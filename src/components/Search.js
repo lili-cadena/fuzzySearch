@@ -7,8 +7,8 @@ class Search extends React.Component{
         this.manageFilterChange = this.manageFilterChange.bind(this);
     }
 
-    manageFilterChange(event) {
-        this.props.onFilterChange(event.target.value);
+    manageFilterChange(e) {
+        this.props.onFilterChange(e.target.value);
     }
 
     render(){

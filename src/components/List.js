@@ -1,7 +1,7 @@
 import React from 'react';
 
-class List extends React.Component{
 
+class List extends React.Component{
     render(){
 
         const filter = this.props.filter;
@@ -19,21 +19,30 @@ class List extends React.Component{
             { amount: 1111.11, date: '15-01-2018T21:34', card_last_four: '9912' }
         ];
 
-        const list = transactions.map((transaction)=>{
-            if(transaction.card_last_four.indexOf(filter) === -1){
-                return;
-            }
-            return <ol key={transaction.card_last_four}>Amount: ${transaction.amount}, Date: {transaction.date}, Card: {transaction.card_last_four}</ol>
+        const list = transactions
+        .sort((a,b)=> a.date > b.date)
+        .map((transaction)=>{
+            if(
+                transaction.card_last_four.indexOf(filter) !== -1 ||
+                transaction.date.indexOf(filter) !== -1 ||
+                transaction.amount.toString().indexOf(filter) !== -1
+            )
+            return (
+                <ul key={transaction.card_last_four}>
+                    <ol >Last four card numbers: {transaction.card_last_four}</ol>
+                    <ol >Date: {transaction.date}</ol>
+                    <ol >Amount: ${transaction.amount}</ol>
+                </ul>
+            )
         })
+        
 
         return(
-            <ul>
+            <div>
                 {list}
-            </ul>
+            </div>
         );
     }
 }
-
-
 
 export default List;
